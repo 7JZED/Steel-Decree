@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bhvrbhdi88vgb"]
+
+[ext_resource type="Script" uid="uid://d1o6jfpndljbj" path="res://Scripts/base.gd" id="1_ospri"]
+[ext_resource type="Texture2D" uid="uid://cql5ecxo6juli" path="res://assets/Soldier.svg" id="2_0s1ta"]
+[ext_resource type="Script" uid="uid://dmd4al5mcqvuj" path="res://Scripts/CollisionBase.gd" id="3_gttnu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybnre"]
+size = Vector2(309.00006, 208.14584)
+
+[node name="BaseR" type="Node2D" unique_id=1097567133]
+script = ExtResource("1_ospri")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1077949000]
+z_index = 2
+position = Vector2(36, 24)
+scale = Vector2(0.2330097, 0.2330097)
+texture = ExtResource("2_0s1ta")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=484995867]
+z_index = 2
+script = ExtResource("3_gttnu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1090942320]
+z_index = 2
+position = Vector2(0, 1.0729141)
+shape = SubResource("RectangleShape2D_ybnre")
+
+[node name="Label" type="Label" parent="Sprite2D/Area2D" unique_id=664411477]
+z_index = 2
+offset_left = 64.375
+offset_top = -98.70835
+offset_right = 150.20833
+offset_bottom = 70.29165
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "B
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="Selection" from="Sprite2D/Area2D" to="." method="_on_area_2d_selection"]
+[connection signal="mouse_entered" from="Sprite2D/Area2D" to="Sprite2D/Area2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Sprite2D/Area2D" to="Sprite2D/Area2D" method="_on_mouse_exited"]

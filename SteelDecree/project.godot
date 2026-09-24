@@ -1,0 +1,55 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Steel Decree"
+run/main_scene="uid://cfuoueg0ta854"
+config/features=PackedStringArray("4.6", "Forward Plus")
+
+[autoload]
+
+SignalManager="*uid://cpawxce7qnhxs"
+CardManager="*uid://cxx6goqxrj14m"
+AiManager="*uid://cnxv5vppw84mm"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=false
+window/stretch/mode="canvas_items"
+
+[input]
+
+SelectionMouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(431, 12),"global_position":Vector2(440, 60),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+ActionMouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(380, 29),"global_position":Vector2(389, 77),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+
+[steam]
+
+initialization/app_data/app_id=480
+initialization/processes/initialize_on_startup=true
+initialization/processes/embed_callbacks=true

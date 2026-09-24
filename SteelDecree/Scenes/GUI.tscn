@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://bbaq4uqanupa"]
+
+[ext_resource type="Script" uid="uid://gdh6p4whwvis" path="res://Scripts/gui.gd" id="1_q7530"]
+
+[node name="Control" type="Control" unique_id=802523228]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_q7530")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2106154782]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Move" type="Button" parent="HBoxContainer" unique_id=1605036667]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Move
+"
+
+[node name="Attack" type="Button" parent="HBoxContainer" unique_id=1693983914]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Attack
+"
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=279815214]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.78300005
+anchor_top = 0.77300006
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.639893
+offset_top = -4.840088
+offset_right = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+tab_alignment = 1
+current_tab = 0
+
+[node name="Number Cards" type="Button" parent="TabContainer" unique_id=1521272884]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Num1" type="Button" parent="TabContainer/Number Cards" unique_id=1694874046]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "1"
+
+[node name="Num2" type="Button" parent="TabContainer/Number Cards" unique_id=8010627]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 160.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "2"
+
+[node name="Num3" type="Button" parent="TabContainer/Number Cards" unique_id=6104241]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 240.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "3"
+
+[node name="Num4" type="Button" parent="TabContainer/Number Cards" unique_id=1212305408]
+layout_mode = 0
+offset_left = 240.0
+offset_right = 320.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "4"
+
+[node name="Num5" type="Button" parent="TabContainer/Number Cards" unique_id=191362391]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 400.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "5"
+
+[node name="Num6" type="Button" parent="TabContainer/Number Cards" unique_id=710694434]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 119.0
+offset_right = 80.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 24
+text = "6"
+
+[node name="Num7" type="Button" parent="TabContainer/Number Cards" unique_id=83396503]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 119.0
+offset_right = 160.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 24
+text = "7"
+
+[node name="Num8" type="Button" parent="TabContainer/Number Cards" unique_id=832017622]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 119.0
+offset_right = 240.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 24
+text = "8"
+
+[node name="Num9" type="Button" parent="TabContainer/Number Cards" unique_id=1276198461]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 119.0
+offset_right = 320.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 24
+text = "9"
+
+[node name="Num10" type="Button" parent="TabContainer/Number Cards" unique_id=807652900]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 119.0
+offset_right = 400.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 24
+text = "10"
+
+[node name="Other Cards" type="Button" parent="TabContainer" unique_id=1353608058]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="TabContainer/Other Cards" unique_id=130338043]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 219.0
+text = "COMING SOON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="RedEnable" from="." to="." method="_on_red_enable"]
+[connection signal="pressed" from="HBoxContainer/Move" to="." method="_on_move_pressed"]
+[connection signal="pressed" from="HBoxContainer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num1" to="." method="_on_num_1_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num2" to="." method="_on_num_2_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num3" to="." method="_on_num_3_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num4" to="." method="_on_num_4_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num5" to="." method="_on_num_5_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num6" to="." method="_on_num_6_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num7" to="." method="_on_num_7_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num8" to="." method="_on_num_8_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num9" to="." method="_on_num_9_pressed"]
+[connection signal="pressed" from="TabContainer/Number Cards/Num10" to="." method="_on_num_10_pressed"]

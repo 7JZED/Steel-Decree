@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cfuoueg0ta854"]
+
+[ext_resource type="PackedScene" uid="uid://bbaq4uqanupa" path="res://Scenes/GUI.tscn" id="1_wk0rq"]
+[ext_resource type="Texture2D" uid="uid://brpxjio8t7q7n" path="res://assets/Map.png" id="2_vyfiw"]
+[ext_resource type="Texture2D" uid="uid://bw4mrqqatbvc6" path="res://assets/Marker1.svg" id="3_akdgq"]
+[ext_resource type="Script" uid="uid://c4ea55kbpnjq8" path="res://Scripts/CordSelector.gd" id="4_fc4l0"]
+
+[node name="Battlefield" type="Node2D" unique_id=1995263935]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1986007319]
+
+[node name="Control" parent="CanvasLayer" unique_id=802523228 instance=ExtResource("1_wk0rq")]
+
+[node name="Map" type="Sprite2D" parent="." unique_id=1732722774]
+position = Vector2(1243, 517)
+texture = ExtResource("2_vyfiw")
+
+[node name="CordSelectionMarker" type="Sprite2D" parent="." unique_id=1800391343]
+z_index = 5
+position = Vector2(-15, -15)
+scale = Vector2(0.25213677, 0.25213677)
+texture = ExtResource("3_akdgq")
+script = ExtResource("4_fc4l0")
