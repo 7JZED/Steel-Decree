@@ -32,9 +32,12 @@ func _ready() -> void:
 	TypeLabel.text = str(CardType)
 	CardHealth = CardType
 	
+	add_to_group(str(CardHealth))
+	
 	SignalManager.NewSelection.connect(NewSelect)
 	SignalManager.MoveInit.connect(_Move)
 	SignalManager.AttackInit.connect(_Attack)
+	SignalManager.ActionPerformed.connect(Action)
 	
 	print("new card id ", CardID,)
 	print("team ", Team)
@@ -69,14 +72,15 @@ func _Attack():
 		CardManager.AttackingTeam = Team
 		await SignalManager.TargetSelect
 		AttackMode = false
-		SignalManager.ActionPerformed.emit()
 		
 	#receiver
 	if Selected == false:
 		var ReceivingID = await SignalManager.TargetSelect
-		if ReceivingID == CardID and CardManager.AttackingTeam != Team:
+		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200:
 			CardHealth = CardHealth - CardManager.AttackingNum
+			
 		AttackMode = false
+		add_to_group(str(CardHealth))
 
 func _Move():
 	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
@@ -93,8 +97,11 @@ func _on_area_2d_selection() -> void:
 	if AttackMode == true:
 		SignalManager.TargetSelect.emit(CardID)
 
-
 func NewSelect():
 	if AttackMode == false:
 		Selected = false
 		$CardSelectionMarker.visible = false
+
+func Action():
+	if CardManager.CurrentPlayingTeam != Team:
+		NewSelection.emit()

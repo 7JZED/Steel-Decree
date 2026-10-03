@@ -50,7 +50,6 @@ func _on_attack_pressed() -> void:
 	SignalManager.AttackInit.emit()
 
 func _TurnPass() -> void:
-	TurnCounter.text = "Turns Left:" + str(CardManager.TurnCount)
-	print("detected")
-	$Team.text = CardManager.CurrentPlayingTeam
+	TurnCounter.text = "Turns Left: " + str(CardManager.TurnCount)
+	$Team.text = "Team: " + CardManager.CurrentPlayingTeam
 	

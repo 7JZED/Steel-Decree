@@ -12,11 +12,12 @@
 [node name="Control" parent="CanvasLayer" unique_id=802523228 instance=ExtResource("1_wk0rq")]
 
 [node name="Map" type="Sprite2D" parent="." unique_id=1732722774]
+z_index = -10
 position = Vector2(1243, 517)
 texture = ExtResource("2_vyfiw")
 
 [node name="CordSelectionMarker" type="Sprite2D" parent="." unique_id=1800391343]
-z_index = 5
+z_index = -5
 position = Vector2(-15, -15)
 scale = Vector2(0.25213677, 0.25213677)
 texture = ExtResource("3_akdgq")
