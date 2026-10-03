@@ -79,13 +79,13 @@ func _Attack():
 		AttackMode = false
 
 func _Move():
-	if Selected == true and PointDistance < 150 :
+	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
 		position = SelectedCords
 		SignalManager.ActionPerformed.emit()
 
 #selection detection(rhyme not intended)
 func _on_area_2d_selection() -> void:
-	if AttackMode == false:
+	if AttackMode == false and Team == CardManager.CurrentPlayingTeam:
 		SignalManager.NewSelection.emit()
 		print(CardID, " selected")
 		Selected = true

@@ -61,7 +61,6 @@ func CreateCard(CardNumber, Type):
 				CardInstance.position = Vector2(270, 1000)
 				add_child(CardInstance)
 
-
 func _NewCard(CNum):
 	CreateCard(CNum, "Num")
 	SignalManager.ActionPerformed.emit()

@@ -154,6 +154,14 @@ text = "COMING SOON"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TurnCounter" type="Label" parent="." unique_id=1785171869]
+layout_mode = 0
+offset_left = 1658.0
+offset_right = 1920.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 30
+text = "Turn Number:"
+
 [connection signal="RedEnable" from="." to="." method="_on_red_enable"]
 [connection signal="pressed" from="HBoxContainer/Move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="HBoxContainer/Attack" to="." method="_on_attack_pressed"]

@@ -3,7 +3,7 @@ extends Node2D
 @onready var TeamLabel = $Sprite2D/Area2D/Label
 
 var AttackMode
-var CardID
+var CardID 
 var Team
 var CardHealth = 50
 
@@ -31,7 +31,6 @@ func _Attack():
 	if ReceivingID == CardID and CardManager.AttackingTeam != Team:
 		CardHealth = CardHealth - CardManager.AttackingNum
 	AttackMode = false
-
 
 func _on_area_2d_selection() -> void:
 	if AttackMode == true:
