@@ -8,6 +8,10 @@ var CardType
 var CardHealth
 var Team
 
+#AI
+signal AICollsionCarrier(send)
+var ActiveCards:Dictionary = {}
+
 # inter card cordination
 signal ActionPerformed
 
@@ -31,8 +35,11 @@ func _ready() -> void:
 	#sets the card health etc to the card type
 	TypeLabel.text = str(CardType)
 	CardHealth = CardType
+	$"Sprite2D/ID label".text = str(CardID)
+	
 	
 	add_to_group(str(CardHealth))
+	add_to_group(Team)
 	
 	SignalManager.NewSelection.connect(NewSelect)
 	SignalManager.MoveInit.connect(_Move)
@@ -105,3 +112,7 @@ func NewSelect():
 func Action():
 	if CardManager.CurrentPlayingTeam != Team:
 		NewSelection.emit()
+
+
+
+## AI ONLY ----------------------------------------
