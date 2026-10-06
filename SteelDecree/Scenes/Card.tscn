@@ -79,6 +79,7 @@ collision_mask = 4
 position = Vector2(-3.0517578e-05, 0)
 shape = SubResource("RectangleShape2D_wejov")
 debug_color = Color(0.7211993, 0.46918017, 0.27744523, 0.41960785)
+debug_color = Color(0.654902, 0.34509805, 0.9647059, 0)
 
 [node name="CardSelectionMarker" type="Sprite2D" parent="." unique_id=821064055]
 z_index = 2
@@ -91,6 +92,13 @@ z_index = 2
 position = Vector2(36.249996, 56.500004)
 scale = Vector2(0.22843449, 0.22413792)
 texture = ExtResource("6_8ekg7")
+
+[node name="MovementPotentialIndicator" type="Line2D" parent="." unique_id=1972522086]
+position = Vector2(0, 17.432432)
+scale = Vector2(1, 0.4189189)
+points = PackedVector2Array(36, 25, 107, -106.064514)
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [connection signal="Selection" from="Sprite2D/Area2D" to="." method="_on_area_2d_selection"]
 [connection signal="mouse_entered" from="Sprite2D/Area2D" to="Sprite2D/Area2D" method="_on_mouse_entered"]

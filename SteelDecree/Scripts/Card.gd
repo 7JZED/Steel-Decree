@@ -59,16 +59,18 @@ func _process(_delta: float) -> void:
 	#marker pos
 	$CardSelectionMarker.global_position = position + Vector2(36, -20)
 	$TeamMarker.global_position = position + Vector2(36, 60)
-	PointDistance = position.distance_to(SelectedCords)
+	PointDistance = global_position.distance_to(SelectedCords)
 	
 	#card despawner
 	if CardHealth <= 0:
 		queue_free()
+	if Selected == true and PointDistance < 150:
+		$MovementPotentialIndicator.set_point_position(1, $MovementPotentialIndicator.to_local(SelectedCords))
 
 func _unhandled_input(event: InputEvent) -> void:
 	# selects cords
 	if Input.is_action_just_pressed("SelectionMouse"):
-		SelectedCords = get_viewport().get_mouse_position()
+		SelectedCords = get_global_mouse_position()
 
 func _Attack():
 	AttackMode = true
@@ -90,8 +92,9 @@ func _Attack():
 		add_to_group(str(CardHealth))
 
 func _Move():
+	print(PointDistance)
 	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
-		position = SelectedCords
+		global_position = to_local(SelectedCords)
 		SignalManager.ActionPerformed.emit()
 
 #selection detection(rhyme not intended)
