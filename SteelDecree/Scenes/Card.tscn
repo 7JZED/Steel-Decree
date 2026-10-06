@@ -13,6 +13,9 @@ size = Vector2(309.00006, 208.14584)
 [sub_resource type="CircleShape2D" id="CircleShape2D_kphy1"]
 radius = 1077.2853
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wejov"]
+size = Vector2(326.16675, 223.16669)
+
 [node name="Node2D" type="Node2D" unique_id=1097567133]
 script = ExtResource("1_21rx5")
 
@@ -46,12 +49,36 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="AICollision" type="Area2D" parent="Sprite2D" unique_id=1921912084]
-collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 script = ExtResource("4_wejov")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AICollision" unique_id=2032241492]
+light_mask = 0
+visibility_layer = 4
 shape = SubResource("CircleShape2D_kphy1")
+debug_color = Color(0.52171254, 0.4541182, 0.9032678, 0.41960785)
+
+[node name="ID label" type="Label" parent="Sprite2D" unique_id=1390975033]
+z_index = 2
+offset_left = 133.04167
+offset_top = -98.708336
+offset_right = 283.25
+offset_bottom = -4.2916565
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ai detection" type="Area2D" parent="Sprite2D" unique_id=1658646909]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/ai detection" unique_id=1096229867]
+position = Vector2(-3.0517578e-05, 0)
+shape = SubResource("RectangleShape2D_wejov")
+debug_color = Color(0.7211993, 0.46918017, 0.27744523, 0.41960785)
 debug_color = Color(0.654902, 0.34509805, 0.9647059, 0)
 
 [node name="CardSelectionMarker" type="Sprite2D" parent="." unique_id=821064055]
