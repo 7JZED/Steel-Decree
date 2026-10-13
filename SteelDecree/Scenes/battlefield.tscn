@@ -18,7 +18,6 @@ texture = ExtResource("2_vyfiw")
 
 [node name="CordSelectionMarker" type="Sprite2D" parent="." unique_id=1800391343]
 z_index = -5
-position = Vector2(-15, -15)
 scale = Vector2(0.25213677, 0.25213677)
 texture = ExtResource("3_akdgq")
 script = ExtResource("4_fc4l0")

@@ -57,9 +57,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	
 	#marker pos
-	$CardSelectionMarker.global_position = position + Vector2(36, -20)
-	$TeamMarker.global_position = position + Vector2(36, 60)
-	PointDistance = global_position.distance_to(SelectedCords)
+	$CardSelectionMarker.global_position = position + Vector2(0, -50)
+	$TeamMarker.global_position = position + Vector2(0, 37)
+	PointDistance =  SelectedCords.distance_to(global_position)
 	
 	#card despawner
 	if CardHealth <= 0:
@@ -71,6 +71,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	# selects cords
 	if Input.is_action_just_pressed("SelectionMouse"):
 		SelectedCords = get_global_mouse_position()
+	
+	if PointDistance < 150:
+		$MovementPotentialIndicator.visible = true
+	if Selected == false or PointDistance > 150:
+		$MovementPotentialIndicator.visible = false
+	if Selected:
+		$MovementPotentialIndicator.set_point_position(1, $MovementPotentialIndicator.to_local(SelectedCords))
 
 func _Attack():
 	AttackMode = true
@@ -81,7 +88,7 @@ func _Attack():
 		CardManager.AttackingTeam = Team
 		await SignalManager.TargetSelect
 		AttackMode = false
-		
+		ActionPerformed.emit()
 	#receiver
 	if Selected == false:
 		var ReceivingID = await SignalManager.TargetSelect
@@ -94,7 +101,7 @@ func _Attack():
 func _Move():
 	print(PointDistance)
 	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
-		global_position = to_local(SelectedCords)
+		global_position = SelectedCords
 		SignalManager.ActionPerformed.emit()
 
 #selection detection(rhyme not intended)
