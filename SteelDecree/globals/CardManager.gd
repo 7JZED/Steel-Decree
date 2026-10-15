@@ -63,12 +63,13 @@ func CreateCard(CardNumber, Type):
 
 func _NewCard(CNum):
 	CreateCard(CNum, "Num")
-	SignalManager.ActionPerformed.emit()
+	SignalManager.ActionPerformed.emit("NewCard")
 
-func _TurnPass(ActionPerformed):
-	if ActionPerformed == "NewCard"
-	TurnCount = TurnCount - 1
-	
+func _TurnPass(ActionPerformed: String):
+	if ActionPerformed == "NewCard":
+		TurnCount = TurnCount - 2
+	if ActionPerformed == "Normal":
+		TurnCount = TurnCount - 1
 	
 	if TurnCount == 0:
 		if CurrentPlayingTeam == "Blue":

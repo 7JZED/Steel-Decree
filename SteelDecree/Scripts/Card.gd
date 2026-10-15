@@ -89,7 +89,7 @@ func _Attack():
 		CardManager.AttackingTeam = Team
 		await SignalManager.TargetSelect
 		AttackMode = false
-		ActionPerformed.emit()
+		SignalManager.ActionPerformed.emit("Normal")
 	#receiver
 	if Selected == false:
 		var ReceivingID = await SignalManager.TargetSelect
@@ -102,7 +102,7 @@ func _Attack():
 func _Move():
 	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
 		global_position = SelectedCords
-		SignalManager.ActionPerformed.emit()
+		SignalManager.ActionPerformed.emit("Normal")
 
 #selection detection(rhyme not intended)
 func _on_area_2d_selection() -> void:

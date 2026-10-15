@@ -49,7 +49,7 @@ func _on_move_pressed() -> void:
 func _on_attack_pressed() -> void:
 	SignalManager.AttackInit.emit()
 
-func _TurnPass() -> void:
+func _TurnPass(ActionPerformed: String) -> void:
 	TurnCounter.text = "Turns Left: " + str(CardManager.TurnCount)
 	$Team.text = "Team: " + CardManager.CurrentPlayingTeam
 	
