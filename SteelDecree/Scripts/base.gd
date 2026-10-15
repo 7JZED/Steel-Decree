@@ -22,7 +22,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#card despawner
 	if CardHealth <= 0:
-		print(CardHealth)
 		queue_free()
 
 func _Attack():

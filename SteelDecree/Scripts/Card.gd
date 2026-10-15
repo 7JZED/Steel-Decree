@@ -45,7 +45,8 @@ func _ready() -> void:
 	SignalManager.MoveInit.connect(_Move)
 	SignalManager.AttackInit.connect(_Attack)
 	SignalManager.ActionPerformed.connect(Action)
-	
+	print("---------------------------------------------------------------------")
+	print("NEW CARD DATA")
 	print("new card id ", CardID,)
 	print("team ", Team)
 	
@@ -99,7 +100,6 @@ func _Attack():
 		add_to_group(str(CardHealth))
 
 func _Move():
-	print(PointDistance)
 	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
 		global_position = SelectedCords
 		SignalManager.ActionPerformed.emit()
@@ -108,7 +108,6 @@ func _Move():
 func _on_area_2d_selection() -> void:
 	if AttackMode == false and Team == CardManager.CurrentPlayingTeam:
 		SignalManager.NewSelection.emit()
-		print(CardID, " selected")
 		Selected = true
 		$CardSelectionMarker.visible = true
 	if AttackMode == true:

@@ -65,10 +65,11 @@ func _NewCard(CNum):
 	CreateCard(CNum, "Num")
 	SignalManager.ActionPerformed.emit()
 
-func _TurnPass():
+func _TurnPass(ActionPerformed):
+	if ActionPerformed == "NewCard"
 	TurnCount = TurnCount - 1
-	print("turn number ", TurnCount)
-	print(CurrentPlayingTeam)
+	
+	
 	if TurnCount == 0:
 		if CurrentPlayingTeam == "Blue":
 			CurrentPlayingTeam = "Red"
@@ -79,3 +80,7 @@ func _TurnPass():
 			TurnCount = 7
 			SignalManager.AITurnPassoff.emit()
 			return
+	print("---------------------------------------------------------------------")
+	print(CurrentPlayingTeam)
+	print("TURN DATA")
+	print("turn number ", TurnCount)

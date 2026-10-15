@@ -13,6 +13,7 @@ config_version=5
 config/name="Steel Decree"
 run/main_scene="uid://cfuoueg0ta854"
 config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="uid://q8su6k6om3kg"
 
 [autoload]
 
@@ -24,7 +25,6 @@ AiManager="*uid://cnxv5vppw84mm"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 

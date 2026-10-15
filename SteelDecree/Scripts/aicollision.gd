@@ -17,8 +17,10 @@ func _on_area_entered(area: Area2D) -> void:
 		ToSend["CardHealth"] = area.get_parent().get_parent().CardHealth
 		ToSend["CardTeam"] = area.get_parent().get_parent().Team
 		ToSend["CardID"] = area.get_parent().get_parent().CardID
-		AICollsionCarrier.emit(ToSend)
+		SignalManager.AICollsionCarrier.emit(ToSend)
 
 
 func _on_area_exited(area: Area2D) -> void:
-	pass
+	ToSend =  {}
+	ToSend["CardID"] = area.get_parent().get_parent().CardID
+	SignalManager.AICollsionCarrier.emit(ToSend)

@@ -15,13 +15,23 @@ func _ready() -> void:
 
 func _Turn_Begin():
 	pass
-	
 
 
+## not usebale at the moment (maybe)
 func _NewData(send):
 	var IDTemp = send.CardID
-	ActiveCards[str(IDTemp) + "NEARBY"] = send
-	
+	if send.size() >= 1:
+		ActiveCards[str(IDTemp) + " NEARBY"] = send
+		print("---------------------------------------------------------------------")
+		print("NEW AI COLLISION DATA")
+		print(JSON.stringify(ActiveCards, "\t"))
+	else:
+		ActiveCards[str(IDTemp) + " NEARBY"] = {}
+		IDTemp = send.CardID
+		print("---------------------------------------------------------------------")
+		print("NEW AI COLLISION DATA")
+		print(JSON.stringify(ActiveCards, "\t"))
+
 
 
 # RE USABLE FUNCS --------------------------------------------------------------
