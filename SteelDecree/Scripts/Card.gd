@@ -95,7 +95,7 @@ func _Attack():
 		var ReceivingID = await SignalManager.TargetSelect
 		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200:
 			CardHealth = CardHealth - CardManager.AttackingNum
-			
+			$Sprite2D/Label.text = str(CardHealth)
 		AttackMode = false
 		add_to_group(str(CardHealth))
 

@@ -71,7 +71,7 @@ func _TurnPass(ActionPerformed: String):
 	if ActionPerformed == "Normal":
 		TurnCount = TurnCount - 1
 	
-	if TurnCount == 0:
+	if TurnCount <= 0:
 		if CurrentPlayingTeam == "Blue":
 			CurrentPlayingTeam = "Red"
 			TurnCount = 7
