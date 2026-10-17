@@ -11,7 +11,7 @@ var Team
 #AI
 signal AICollsionCarrier(send) # prolly useless
 var ActiveCards:Dictionary = {}
-signal AICardTurnPassoff(ID)
+signal AICardTurnPassoff
 
 # inter card cordination
 signal ActionPerformed
@@ -22,7 +22,7 @@ signal NewSelection
 
 #movement
 signal MoveInit
-var PointDistance
+var PointDistance = 0
 var SelectedCords = Vector2(0,0)
 
 #attack
@@ -129,5 +129,18 @@ func Action():
 
 
 ## AI ONLY ----------------------------------------
-func AIMain():
-	pass
+func AIMain(SelectedCards):
+	print("poo1")
+	if SelectedCards == self:
+		print("poo2")
+			
+func FindCloseCards(Threshold: int = 200):
+		var AllCards = get_tree().has_group("Red")
+		var NearCards: Array = []
+		for Cards in AllCards:
+			var Distance = global_position.distance_to(Cards)
+			if Distance < Threshold:
+				NearCards.append(Cards)
+		print(NearCards)
+		return NearCards
+	

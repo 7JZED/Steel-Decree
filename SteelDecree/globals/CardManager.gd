@@ -47,7 +47,7 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 		IDNum = IDNum + 1
 
 		#team assignment
-		CardInstance.Team = CurrentPlayingTeam
+		CardInstance.Team = Team
 	
 		CardInstance.CardType = CardNumber
 
@@ -80,7 +80,7 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 			CardInstance.CardID = 1
 
 func _NewCard(CNum):
-	CreateCard(CNum, "Num")
+	CreateCard(CNum, "Num", CurrentPlayingTeam)
 	SignalManager.ActionPerformed.emit("NewCard")
 
 func _TurnPass(ActionPerformed: String):

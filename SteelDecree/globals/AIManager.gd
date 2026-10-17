@@ -18,7 +18,11 @@ func _Turn_Begin():
 	SelectedCards.shuffle()
 	SelectedCards = SelectedCards.slice(0, 6)
 	for i in 6:
-		SignalManager.AITurnPassoff.emit(SelectedCards[i])
+		if SelectedCards.size() > i:
+			print("poo0")
+			SignalManager.AITurnPassoff.emit(SelectedCards[i])
+		else:
+			break
 
 ## not usebale at the moment (maybe)
 func _NewData(send):
