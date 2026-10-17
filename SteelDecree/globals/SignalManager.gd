@@ -8,3 +8,4 @@ signal TargetSelect
 signal ActionPerformed
 signal AITurnPassoff
 signal AICollsionCarrier
+signal AICardTurnPassoff

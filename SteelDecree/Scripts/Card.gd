@@ -9,8 +9,9 @@ var CardHealth
 var Team
 
 #AI
-signal AICollsionCarrier(send)
+signal AICollsionCarrier(send) # prolly useless
 var ActiveCards:Dictionary = {}
+signal AICardTurnPassoff(ID)
 
 # inter card cordination
 signal ActionPerformed
@@ -37,14 +38,17 @@ func _ready() -> void:
 	CardHealth = CardType
 	$"Sprite2D/ID label".text = str(CardID)
 	
-	
+	#add to groups for ai
 	add_to_group(str(CardHealth))
 	add_to_group(Team)
 	
+	# connecting all funcs
 	SignalManager.NewSelection.connect(NewSelect)
 	SignalManager.MoveInit.connect(_Move)
 	SignalManager.AttackInit.connect(_Attack)
 	SignalManager.ActionPerformed.connect(Action)
+	SignalManager.AICardTurnPassoff.connect(AIMain)
+	#telemtry
 	print("---------------------------------------------------------------------")
 	print("NEW CARD DATA")
 	print("new card id ", CardID,)
@@ -125,3 +129,5 @@ func Action():
 
 
 ## AI ONLY ----------------------------------------
+func AIMain():
+	pass

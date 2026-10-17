@@ -19,8 +19,9 @@ func _ready() -> void:
 	SignalManager.NewCard.connect(_NewCard)
 	SignalManager.ActionPerformed.connect(_TurnPass)
 	SignalManager.AttackInit.connect(_AttackInit)
-	CreateCard(0, "Base")
-
+	CreateCard(0, "Base", "Red", true, Vector2(200,50))
+	CreateCard(0, "Base", "Blue", true, Vector2(270, 1000))
+	CreateCard(10, "Num", "Blue", true, Vector2(300, 700))
 
 func _AttackInit():
 	pass
@@ -30,11 +31,16 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("SelectionMouse"):
 		SelectedPos = get_viewport().get_mouse_position()
 
-func CreateCard(CardNumber, Type):
+func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable: bool = false, LocationOverride: Vector2 = Vector2(0, 0)):
 	if Type == "Num":
-		# puts card at current selection
+		
 		var CardInstance = NumCard.instantiate()
-		CardInstance.position = SelectedPos
+		
+		# puts card at current selection
+		if LocationOverrideEnable == false:
+			CardInstance.position = SelectedPos
+		if LocationOverrideEnable == true:
+			CardInstance.position = LocationOverride
 
 		#id
 		CardInstance.CardID = IDNum
@@ -47,9 +53,11 @@ func CreateCard(CardNumber, Type):
 
 		add_child(CardInstance)
 
-	if Type == "Base":
+	#UNUSED BUT KEEPING JUST INCASE
+	if Type == "QuickBase":
 		for i in range(2):
 			var CardInstance = BaseCard.instantiate()
+			#the for loop handles the id too
 			if i == 0:
 				CardInstance.CardID = i
 				CardInstance.Team = "Blue"
@@ -60,6 +68,16 @@ func CreateCard(CardNumber, Type):
 				CardInstance.Team = "Red"
 				CardInstance.position = Vector2(270, 1000)
 				add_child(CardInstance)
+	
+	if Type == "Base":
+		var CardInstance = BaseCard.instantiate()
+		CardInstance.Team = Team
+		CardInstance.position = LocationOverride
+		add_child(CardInstance)
+		if Team == "Blue":
+			CardInstance.CardID = 0
+		if Team == "Red":
+			CardInstance.CardID = 1
 
 func _NewCard(CNum):
 	CreateCard(CNum, "Num")
