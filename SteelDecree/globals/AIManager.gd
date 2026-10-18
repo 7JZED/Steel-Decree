@@ -19,8 +19,8 @@ func _Turn_Begin():
 		var SelectedCards: Array = GetHighestBlueCards()
 		SelectedCards.shuffle()
 		SelectedCards = SelectedCards.slice(0, 5)
-		print(SelectedCards)
-		for i in 5:
+		print("SEARCH ME" + str(SelectedCards))
+		for i in SelectedCards.size():
 			#checks if they exist to prevent errorss
 			if SelectedCards.size() > i:
 				SignalManager.AITurnPassoff.emit(SelectedCards[i])

@@ -16,7 +16,7 @@ radius = 712.2037
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wejov"]
 size = Vector2(326.16675, 223.16669)
 
-[node name="Node2D" type="Node2D" unique_id=1097567133]
+[node name="CARD" type="Node2D" unique_id=1097567133]
 script = ExtResource("1_21rx5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1077949000]

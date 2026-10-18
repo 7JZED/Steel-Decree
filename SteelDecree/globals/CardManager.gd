@@ -95,7 +95,7 @@ func _TurnPass(ActionPerformed: String):
 			CurrentPlayingTeam = "Red"
 			TurnCount = 7
 			
-		if CurrentPlayingTeam == "Red":
+		elif CurrentPlayingTeam == "Red":
 			CurrentPlayingTeam = "Blue"
 			TurnCount = 7
 			SignalManager.AITurnPassoff.emit()
