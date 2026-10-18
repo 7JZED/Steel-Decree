@@ -11,7 +11,7 @@ var Team
 #AI
 signal AICollsionCarrier(send) # prolly useless
 var ActiveCards:Dictionary = {}
-signal AICardTurnPassoff
+signal AITurnPassoff
 
 # inter card cordination
 signal ActionPerformed
@@ -47,7 +47,7 @@ func _ready() -> void:
 	SignalManager.MoveInit.connect(_Move)
 	SignalManager.AttackInit.connect(_Attack)
 	SignalManager.ActionPerformed.connect(Action)
-	SignalManager.AICardTurnPassoff.connect(AIMain)
+	SignalManager.AITurnPassoff.connect(AIMain)
 	#telemtry
 	print("---------------------------------------------------------------------")
 	print("NEW CARD DATA")
@@ -130,10 +130,10 @@ func Action():
 
 ## AI ONLY ----------------------------------------
 func AIMain(SelectedCards):
-	print("poo1")
-	if SelectedCards == self:
-		print("poo2")
-			
+	if self == SelectedCards:
+		print("detected" + str(CardID))
+		pass
+
 func FindCloseCards(Threshold: int = 200):
 		var AllCards = get_tree().has_group("Red")
 		var NearCards: Array = []
@@ -143,4 +143,3 @@ func FindCloseCards(Threshold: int = 200):
 				NearCards.append(Cards)
 		print(NearCards)
 		return NearCards
-	

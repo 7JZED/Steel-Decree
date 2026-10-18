@@ -80,8 +80,9 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 			CardInstance.CardID = 1
 
 func _NewCard(CNum):
-	CreateCard(CNum, "Num", CurrentPlayingTeam)
-	SignalManager.ActionPerformed.emit("NewCard")
+	if TurnCount > 1:
+		SignalManager.ActionPerformed.emit("NewCard")
+		CreateCard(CNum, "Num", CurrentPlayingTeam)
 
 func _TurnPass(ActionPerformed: String):
 	if ActionPerformed == "NewCard":
@@ -93,13 +94,13 @@ func _TurnPass(ActionPerformed: String):
 		if CurrentPlayingTeam == "Blue":
 			CurrentPlayingTeam = "Red"
 			TurnCount = 7
-			return
+			
 		if CurrentPlayingTeam == "Red":
 			CurrentPlayingTeam = "Blue"
 			TurnCount = 7
 			SignalManager.AITurnPassoff.emit()
-			return
+			
 	print("---------------------------------------------------------------------")
-	print(CurrentPlayingTeam)
 	print("TURN DATA")
+	print(CurrentPlayingTeam)
 	print("turn number ", TurnCount)

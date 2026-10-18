@@ -7,22 +7,25 @@ var ActiveCards: Dictionary = {}
 
 
 signal AICollsionCarrier(send)
-signal AITurnPassoff(ID)
+signal AITurnPassoff(Cards)
 
 func _ready() -> void:
 	SignalManager.AITurnPassoff.connect(_Turn_Begin)
 	SignalManager.AICollsionCarrier.connect(_NewData)
 
 func _Turn_Begin():
-	var SelectedCards: Array = GetHighestBlueCards()
-	SelectedCards.shuffle()
-	SelectedCards = SelectedCards.slice(0, 6)
-	for i in 6:
-		if SelectedCards.size() > i:
-			print("poo0")
-			SignalManager.AITurnPassoff.emit(SelectedCards[i])
-		else:
-			break
+	if CardManager.CurrentPlayingTeam == "Blue":
+		#grabs top cards
+		var SelectedCards: Array = GetHighestBlueCards()
+		SelectedCards.shuffle()
+		SelectedCards = SelectedCards.slice(0, 5)
+		print(SelectedCards)
+		for i in 5:
+			#checks if they exist to prevent errorss
+			if SelectedCards.size() > i:
+				SignalManager.AITurnPassoff.emit(SelectedCards[i])
+			else:
+				break
 
 ## not usebale at the moment (maybe)
 func _NewData(send):
