@@ -132,7 +132,7 @@ func Action():
 func AIMain(SelectedCards):
 	if self == SelectedCards:
 		print("detected" + str(CardID))
-		pass
+		
 
 func FindCloseCards(Threshold: int = 200):
 		var AllCards = get_tree().has_group("Red")

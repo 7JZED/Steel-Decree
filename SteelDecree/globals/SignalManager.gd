@@ -9,3 +9,4 @@ signal ActionPerformed
 signal AITurnPassoff
 signal AICollsionCarrier
 signal AICardTurnPassoff
+signal AICardInfoRequest

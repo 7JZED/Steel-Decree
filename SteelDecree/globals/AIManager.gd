@@ -8,11 +8,13 @@ var ActiveCards: Dictionary = {}
 
 signal AICollsionCarrier(send)
 signal AITurnPassoff(Cards)
+signal AICardInfoRequest(DataRequested)
+signal AICardInfoPassoff(Data)
 
 func _ready() -> void:
 	SignalManager.AITurnPassoff.connect(_Turn_Begin)
 	SignalManager.AICollsionCarrier.connect(_NewData)
-
+	SignalManager.AICardInfoRequest.connect(_InfoRequest)
 func _Turn_Begin():
 	if CardManager.CurrentPlayingTeam == "Blue":
 		#grabs top cards
@@ -42,7 +44,10 @@ func _NewData(send):
 		#print("NEW AI COLLISION DATA")
 		#print(JSON.stringify(ActiveCards, "\t"))
 
-
+@warning_ignore("unused_parameter")
+func _InfoRequest(DataRequested):
+	if DataRequested == "RedHighest":
+		AICardInfoPassoff.emit(GetHighestRedCards)
 
 # RE USABLE FUNCS --------------------------------------------------------------
 func GetHighestRedCards():
@@ -68,4 +73,3 @@ func GetHighestBlueCards():
 		elif node.get("CardHealth") == PrevHighH:
 			PrevHighNodes.append(node)
 	return PrevHighNodes
-	print(PrevHighNodes)
