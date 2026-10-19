@@ -15,13 +15,13 @@ func _ready() -> void:
 	SignalManager.AITurnPassoff.connect(_Turn_Begin)
 	SignalManager.AICollsionCarrier.connect(_NewData)
 	SignalManager.AICardInfoRequest.connect(_InfoRequest)
+
 func _Turn_Begin():
 	if CardManager.CurrentPlayingTeam == "Blue":
 		#grabs top cards
 		var SelectedCards: Array = GetHighestBlueCards()
 		SelectedCards.shuffle()
 		SelectedCards = SelectedCards.slice(0, 5)
-		print("SEARCH ME" + str(SelectedCards))
 		for i in SelectedCards.size():
 			#checks if they exist to prevent errorss
 			if SelectedCards.size() > i:
@@ -44,7 +44,7 @@ func _NewData(send):
 		#print("NEW AI COLLISION DATA")
 		#print(JSON.stringify(ActiveCards, "\t"))
 
-@warning_ignore("unused_parameter")
+
 func _InfoRequest(DataRequested):
 	if DataRequested == "RedHighest":
 		AICardInfoPassoff.emit(GetHighestRedCards)

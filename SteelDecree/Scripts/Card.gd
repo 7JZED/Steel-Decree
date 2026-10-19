@@ -130,16 +130,17 @@ func Action():
 
 ## AI ONLY ----------------------------------------
 func AIMain(SelectedCards):
-	if self == SelectedCards:
-		print("detected" + str(CardID))
+	if Team == "Blue":
+		var Attackable = FindCloseCards()
 		
 
+
+#finds nearby cards within threshold
 func FindCloseCards(Threshold: int = 200):
-		var AllCards = get_tree().has_group("Red")
-		var NearCards: Array = []
-		for Cards in AllCards:
-			var Distance = global_position.distance_to(Cards)
-			if Distance < Threshold:
-				NearCards.append(Cards)
-		print(NearCards)
-		return NearCards
+	var AllCards = get_tree().get_nodes_in_group("Red")
+	var NearCards: Array = []
+	for Cards in AllCards:
+		var Distance = global_position.distance_to(Cards.global_position)
+		if Distance < Threshold:
+			NearCards.append(Cards)
+	return NearCards
