@@ -69,7 +69,7 @@ func _process(_delta: float) -> void:
 	#card despawner
 	if CardHealth <= 0:
 		queue_free()
-	if Selected == true and PointDistance < 150:
+	if CardManager.CurrentSelectedCard == self and PointDistance < 150:
 		$MovementPotentialIndicator.set_point_position(1, $MovementPotentialIndicator.to_local(SelectedCords))
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -79,23 +79,23 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if PointDistance < 150:
 		$MovementPotentialIndicator.visible = true
-	if Selected == false or PointDistance > 150:
+	if CardManager.CurrentSelectedCard != self or PointDistance > 150:
 		$MovementPotentialIndicator.visible = false
-	if Selected:
+	if CardManager.CurrentSelectedCard == self:
 		$MovementPotentialIndicator.set_point_position(1, $MovementPotentialIndicator.to_local(SelectedCords))
 
 func _Attack():
 	AttackMode = true
 
 	#attacker
-	if Selected == true:
+	if CardManager.CurrentSelectedCard == self:
 		CardManager.AttackingNum = CardHealth
 		CardManager.AttackingTeam = Team
 		await SignalManager.TargetSelect
 		AttackMode = false
 		SignalManager.ActionPerformed.emit("Normal")
 	#receiver
-	if Selected == false:
+	if CardManager.CurrentSelectedCard != self:
 		var ReceivingID = await SignalManager.TargetSelect
 		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200:
 			CardHealth = CardHealth - CardManager.AttackingNum
@@ -104,22 +104,23 @@ func _Attack():
 		add_to_group(str(CardHealth))
 
 func _Move():
-	if Selected == true and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
+	if CardManager.CurrentSelectedCard == self and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
 		global_position = SelectedCords
 		SignalManager.ActionPerformed.emit("Normal")
 
 #selection detection(rhyme not intended)
 func _on_area_2d_selection() -> void:
+	#normal selection
 	if AttackMode == false and Team == CardManager.CurrentPlayingTeam:
 		SignalManager.NewSelection.emit()
-		Selected = true
+		CardManager.CurrentSelectedCard = self
 		$CardSelectionMarker.visible = true
+	#attack selection
 	if AttackMode == true:
 		SignalManager.TargetSelect.emit(CardID)
 
 func NewSelect():
 	if AttackMode == false:
-		Selected = false
 		$CardSelectionMarker.visible = false
 
 func Action():
@@ -132,7 +133,8 @@ func Action():
 func AIMain(SelectedCards):
 	if Team == "Blue":
 		var Attackable = FindCloseCards()
-		
+		Selected = true
+		CardManager.CurrentSelectedCard = self
 
 
 #finds nearby cards within threshold

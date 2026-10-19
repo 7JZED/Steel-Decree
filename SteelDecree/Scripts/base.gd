@@ -30,7 +30,7 @@ func _Attack():
 	if ReceivingID == CardID and CardManager.AttackingTeam != Team:
 		CardHealth = CardHealth - CardManager.AttackingNum
 	AttackMode = false
-
+ 
 func _on_area_2d_selection() -> void:
 	if AttackMode == true:
 		SignalManager.TargetSelect.emit(CardID)
