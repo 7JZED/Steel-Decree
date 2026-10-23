@@ -26,7 +26,7 @@ var PointDistance = 0
 var SelectedCords = Vector2(0,0)
 
 #attack
-signal AttackInit(IDOverride: int)
+signal AttackInit
 signal TargetSelect(ID)
 var AttackMode: bool = false
 
@@ -45,7 +45,7 @@ func _ready() -> void:
 	# connecting all funcs
 	SignalManager.NewSelection.connect(NewSelect)
 	SignalManager.MoveInit.connect(_Move)
-	SignalManager.AttackInit.connect(_Attack)
+	SignalManager.AttackInit.connect(Attack)
 	SignalManager.ActionPerformed.connect(Action)
 	SignalManager.AITurnPassoff.connect(AIMain)
 	#telemtry
@@ -84,27 +84,29 @@ func _unhandled_input(event: InputEvent) -> void:
 	if CardManager.CurrentSelectedCard == self:
 		$MovementPotentialIndicator.set_point_position(1, $MovementPotentialIndicator.to_local(SelectedCords))
 
-func _Attack(IDOverride: int = -1):
+func Attack(IDOverride: int = -1):
 	AttackMode = true
-
 	#attacker
 	if CardManager.CurrentSelectedCard == self:
 		print("poo1")
 		CardManager.AttackingNum = CardHealth
 		CardManager.AttackingTeam = Team
-		await SignalManager.TargetSelect
+		if IDOverride == -1:
+			await SignalManager.TargetSelect
 		print("poo2")
 		AttackMode = false
 		SignalManager.ActionPerformed.emit("Normal")
+		
 	#receiver
-	if CardManager.CurrentSelectedCard != self:
+	else:
 		var ReceivingID
-		if IDOverride == -1:
-			print('butt1')
-			ReceivingID = await SignalManager.TargetSelect
+		print("poopen")
 		if IDOverride != -1:
-			print('butt2')
+			print('butt1')
 			ReceivingID = IDOverride
+		else:
+			print('butt2')
+			ReceivingID = await SignalManager.TargetSelect
 		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200:
 			print('butt3')
 			CardHealth = CardHealth - CardManager.AttackingNum
@@ -146,7 +148,8 @@ func AIMain(SelectedCards):
 		print(str(CardID) + str(Attackable))
 		CardManager.CurrentSelectedCard = self
 		Attackable.shuffle()
-		AttackInit.emit(Attackable[0].CardID)
+		Attack(Attackable[0].CardID)
+		SignalManager.AttackInit.emit()
 
 #finds nearby cards within threshold
 func FindCloseCards(Threshold: int = 200):
