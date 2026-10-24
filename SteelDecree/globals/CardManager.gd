@@ -70,7 +70,6 @@ func _TurnPass(ActionPerformed: String):
 	print("turn number ", TurnCount)
 
 #funcs
-
 func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable: bool = false, LocationOverride: Vector2 = Vector2(0, 0)):
 	if Type == "Num":
 		
@@ -92,3 +91,29 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 		CardInstance.CardType = CardNumber
 
 		add_child(CardInstance)
+
+	#UNUSED BUT KEEPING JUST INCASE
+	if Type == "QuickBase":
+		for i in range(2):
+			var CardInstance = BaseCard.instantiate()
+			#the for loop handles the id too
+			if i == 0:
+				CardInstance.CardID = i
+				CardInstance.Team = "Blue"
+				CardInstance.position = Vector2(200,50)
+				add_child(CardInstance)
+			if i == 1:
+				CardInstance.CardID = i
+				CardInstance.Team = "Red"
+				CardInstance.position = Vector2(270, 1000)
+				add_child(CardInstance)
+	
+	if Type == "Base":
+		var CardInstance = BaseCard.instantiate()
+		CardInstance.Team = Team
+		CardInstance.position = LocationOverride
+		add_child(CardInstance)
+		if Team == "Blue":
+			CardInstance.CardID = 0
+		if Team == "Red":
+			CardInstance.CardID = 1
