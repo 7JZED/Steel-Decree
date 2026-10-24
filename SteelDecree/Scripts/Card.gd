@@ -101,13 +101,13 @@ func Attack(IDOverride: int = -1):
 	else:
 		var ReceivingID
 		print("poopen")
-		if IDOverride != -1:
+		if IDOverride == -1:
 			print('butt1')
 			ReceivingID = IDOverride
 		else:
 			print('butt2')
 			ReceivingID = await SignalManager.TargetSelect
-		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200:
+		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200 or IDOverride == -1:
 			print('butt3')
 			CardHealth = CardHealth - CardManager.AttackingNum
 			$Sprite2D/Label.text = str(CardHealth)
