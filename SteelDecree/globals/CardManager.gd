@@ -33,9 +33,9 @@ func _ready() -> void:
 	SignalManager.NewCard.connect(_NewCard)
 	SignalManager.ActionPerformed.connect(_TurnPass)
 	SignalManager.AttackInit.connect(_AttackInit)
-	CreateCard(50, "Base", "Red", true, Vector2(200,50))
-	CreateCard(50, "Base", "Blue", true, Vector2(270, 1000))
-	CreateCard(10, "Num", "Blue", true, Vector2(300, 700))
+	CreateCard(50, "Base", "Red", true, Vector2(-200,-150))
+	CreateCard(50, "Base", "Blue", true, Vector2(300, 1400))
+	CreateCard(10, "Num", "Blue", true, Vector2(300, 700)) # temp testing
 
 func _AttackInit():
 	pass
@@ -71,7 +71,7 @@ func _TurnPass(ActionPerformed: String):
 	print(CurrentPlayingTeam)
 	print("turn number ", TurnCount)
 
-#funcs
+#reuse funcs
 func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable: bool = false, LocationOverride: Vector2 = Vector2(0, 0)):
 	if Type == "Num":
 		
