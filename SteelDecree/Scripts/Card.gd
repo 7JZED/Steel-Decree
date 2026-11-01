@@ -89,9 +89,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	#attacker
 
+#attacker
 func Attack(IDOverride: int = -1):
 	AttackMode = true
-	#attacker
 	if CardManager.CurrentSelectedCard == self:
 		print("poo1")
 		CardManager.AttackingNum = CardHealth
@@ -115,7 +115,7 @@ func AttackReceiver(IDOverride: int = -1):
 		ReceivingID = await SignalManager.TargetSelect
 	print("CARD ID" + str(ReceivingID))
 	print("CARD ID" + str(CardID))
-	if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200 or (IDOverride == -1 and ReceivingID == CardID):
+	if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200 or (ReceivingID == CardID):
 		print('butt3')
 		CardHealth = CardHealth - CardManager.AttackingNum
 		$Sprite2D/Label.text = str(CardHealth)
