@@ -8,6 +8,9 @@ const  BaseCard = preload("uid://bhvrbhdi88vgb")
 #attack
 var AttackingNum
 var AttackingTeam
+signal AttackReceiverSignal(IDOverride: int)
+signal AttackInit(IDOverride: int)
+signal TargetSelect(ID)
 
 #turns and team
 signal ActionPerformed
@@ -18,7 +21,6 @@ var TurnCount: int =  7
 signal AITurnPassoff
 
 #misc
-signal AttackInit
 var IDNum = 2
 
 #selecttion
@@ -117,3 +119,9 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 			CardInstance.CardID = 0
 		if Team == "Red":
 			CardInstance.CardID = 1
+
+func AttackCall(IDOveride: int = -1):
+	SignalManager.AttackInit.emit(IDOveride)
+	SignalManager.AttackReceiverSignal.emit(IDOveride)
+	
+	

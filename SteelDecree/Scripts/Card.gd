@@ -26,10 +26,10 @@ var PointDistance = 0
 var SelectedCords = Vector2(0,0)
 
 #attack
-signal AttackInit
+signal AttackInit(IDOverride: int)
 signal TargetSelect(ID)
 var AttackMode: bool = false
-
+signal AttackReceiverSignal(IDOverride: int)
 
 func _ready() -> void:
 	
@@ -48,6 +48,8 @@ func _ready() -> void:
 	SignalManager.AttackInit.connect(Attack)
 	SignalManager.ActionPerformed.connect(Action)
 	SignalManager.AITurnPassoff.connect(AIMain)
+	SignalManager.AttackReceiverSignal.connect(AttackReceiver)
+	
 	#telemtry
 	print("---------------------------------------------------------------------")
 	print("NEW CARD DATA")
@@ -84,6 +86,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if CardManager.CurrentSelectedCard == self:
 		$MovementPotentialIndicator.set_point_position(1, $MovementPotentialIndicator.to_local(SelectedCords))
 
+
+	#attacker
+
 func Attack(IDOverride: int = -1):
 	AttackMode = true
 	#attacker
@@ -92,28 +97,32 @@ func Attack(IDOverride: int = -1):
 		CardManager.AttackingNum = CardHealth
 		CardManager.AttackingTeam = Team
 		if IDOverride == -1:
+			SignalManager.AttackReceiverSignal.emit()
 			await SignalManager.TargetSelect
 		print("poo2")
 		AttackMode = false
 		SignalManager.ActionPerformed.emit("Normal")
-		
-	#receiver
-	else:
-		var ReceivingID
-		print("poopen")
-		if IDOverride == -1:
-			print('butt1')
-			ReceivingID = IDOverride
-		else:
-			print('butt2')
-			ReceivingID = await SignalManager.TargetSelect
-		if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200 or IDOverride == -1:
-			print('butt3')
-			CardHealth = CardHealth - CardManager.AttackingNum
-			$Sprite2D/Label.text = str(CardHealth)
-		print("butt4")
-		AttackMode = false
-		add_to_group(str(CardHealth))
+
+#receiver
+func AttackReceiver(IDOverride: int = -1):
+	var ReceivingID
+	print("poopen")
+	if IDOverride != -1:
+		print('butt1')
+		ReceivingID = IDOverride
+	elif IDOverride == -1:
+		print('butt2')
+		ReceivingID = await SignalManager.TargetSelect
+	print("CARD ID" + str(ReceivingID))
+	print("CARD ID" + str(CardID))
+	if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200 or (IDOverride == -1 and ReceivingID == CardID):
+		print('butt3')
+		CardHealth = CardHealth - CardManager.AttackingNum
+		$Sprite2D/Label.text = str(CardHealth)
+	print("butt4")
+	AttackMode = false
+	add_to_group(str(CardHealth))
+
 
 func _Move():
 	if CardManager.CurrentSelectedCard == self and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
@@ -140,16 +149,14 @@ func Action():
 		NewSelection.emit()
 
 
-
-## AI ONLY ----------------------------------------
+## AI ONLY ---------------------------------------------------------------------
 func AIMain(SelectedCards):
 	if SelectedCards == self:
 		var Attackable = FindCloseCards()
 		print(str(CardID) + str(Attackable))
 		CardManager.CurrentSelectedCard = self
 		Attackable.shuffle()
-		Attack(Attackable[0].CardID)
-		SignalManager.AttackInit.emit()
+		CardManager.AttackCall(Attackable[0].CardID)
 
 #finds nearby cards within threshold
 func FindCloseCards(Threshold: int = 200):

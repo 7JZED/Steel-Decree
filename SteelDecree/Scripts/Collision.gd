@@ -13,7 +13,6 @@ func _input(event: InputEvent) -> void:
 		Selection.emit()
 
 
-
 func _on_mouse_entered() -> void:
 	MouseState = true
 	

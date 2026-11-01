@@ -4,7 +4,7 @@ extends Control
 
 
 signal NewCard(CNum)
-signal AttackInit(IDOverride)
+signal AttackInit
 signal MoveInit
 signal RedEnable
 signal BlueEnable
