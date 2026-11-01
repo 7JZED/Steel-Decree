@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brpxjio8t7q7n" path="res://assets/Map.png" id="2_vyfiw"]
 [ext_resource type="Texture2D" uid="uid://bw4mrqqatbvc6" path="res://assets/Marker1.svg" id="3_akdgq"]
 [ext_resource type="Script" uid="uid://c4ea55kbpnjq8" path="res://Scripts/CordSelector.gd" id="4_fc4l0"]
+[ext_resource type="Script" uid="uid://b6otqcu856jf" path="res://Scripts/camera.gd" id="5_vyfiw"]
 
 [node name="Battlefield" type="Node2D" unique_id=1995263935]
 
@@ -21,3 +22,7 @@ z_index = -5
 scale = Vector2(0.25213677, 0.25213677)
 texture = ExtResource("3_akdgq")
 script = ExtResource("4_fc4l0")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1477624350]
+position = Vector2(917, 540)
+script = ExtResource("5_vyfiw")
