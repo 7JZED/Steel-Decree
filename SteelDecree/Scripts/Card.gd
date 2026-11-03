@@ -95,36 +95,26 @@ func _unhandled_input(event: InputEvent) -> void:
 func Attack(IDOverride: int = -1):
 	AttackMode = true
 	if CardManager.CurrentSelectedCard == self:
-		print("poo1")
 		CardManager.AttackingNum = CardHealth
 		CardManager.AttackingTeam = Team
 		if IDOverride == -1:
 			SignalManager.AttackReceiverSignal.emit()
 			await SignalManager.TargetSelect
-		print("poo2")
 		AttackMode = false
 		SignalManager.ActionPerformed.emit("Normal")
 
 #receiver
 func AttackReceiver(IDOverride: int = -1):
 	var ReceivingID
-	print("poopen")
 	if IDOverride != -1:
-		print('butt1')
 		ReceivingID = IDOverride
 	elif IDOverride == -1:
-		print('butt2')
 		ReceivingID = await SignalManager.TargetSelect
-	print("CARD ID" + str(ReceivingID))
-	print("CARD ID" + str(CardID))
 	if ReceivingID == CardID and CardManager.AttackingTeam != Team and PointDistance <= 200 or (ReceivingID == CardID):
-		print('butt3')
 		CardHealth = CardHealth - CardManager.AttackingNum
 		$Sprite2D/Label.text = str(CardHealth)
-	print("butt4")
 	AttackMode = false
 	add_to_group(str(CardHealth))
-
 #Movement ----------------------------------------------------------------------
 
 func _Move():
@@ -150,7 +140,6 @@ func NewSelect():
 func Action():
 	if CardManager.CurrentPlayingTeam != Team:
 		NewSelection.emit()
-
 
 ## AI ONLY ---------------------------------------------------------------------
 func AIMain(SelectedCards):

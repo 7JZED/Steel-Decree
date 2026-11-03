@@ -17,17 +17,26 @@ func _ready() -> void:
 	SignalManager.AICardInfoRequest.connect(_InfoRequest)
 
 func _MainLoop():
+	var SelectedCards: Array = GetHighestBlueCards()
 	if CardManager.CurrentPlayingTeam == "Blue":
 		#grabs top 5 cards
-		var SelectedCards: Array = GetHighestBlueCards()
-		SelectedCards.shuffle()
 		SelectedCards = SelectedCards.slice(0, 5)
+		SelectedCards.shuffle()
 	
 		#intial attacking
 		for i in SelectedCards.size():
 			#checks if they exist to prevent errors
 			if SelectedCards.size() > i:
 				SignalManager.AITurnPassoff.emit(SelectedCards[i])
+			else:
+				break
+	if CardManager.TurnCount >= 0:
+		for i in CardManager.TurnCount:
+			if CardManager.TurnCount > i:
+				SelectedCards.shuffle()
+				SignalManager.AITurnPassoff.emit(SelectedCards.front())
+			else:
+				break
 
 ## not usebale at the moment (maybe)
 func _NewData(send):

@@ -35,7 +35,21 @@ func _ready() -> void:
 	SignalManager.AttackInit.connect(_AttackInit)
 	CreateCard(50, "Base", "Red", true, Vector2(-200,-150))
 	CreateCard(50, "Base", "Blue", true, Vector2(300, 1400))
-	CreateCard(10, "Num", "Blue", true, Vector2(300, 700)) # temp testing
+	
+	#ai side testing
+	CreateCard(10, "Num", "Blue", true, Vector2(300, 700))
+	CreateCard(10, "Num", "Blue", true, Vector2(150, 800))
+	CreateCard(10, "Num", "Blue", true, Vector2(390, 750))
+	CreateCard(10, "Num", "Blue", true, Vector2(490, 700))
+	CreateCard(10, "Num", "Blue", true, Vector2(700, 700))
+
+	#ai side testing
+	CreateCard(10, "Num", "Red", true, Vector2(390, 600))
+	CreateCard(10, "Num", "Red", true, Vector2(150, 650))
+	CreateCard(10, "Num", "Red", true, Vector2(300, 600))
+	CreateCard(10, "Num", "Red", true, Vector2(490, 900))
+	CreateCard(10, "Num", "Red", true, Vector2(650, 800))
+
 
 func _AttackInit():
 	pass
@@ -123,5 +137,3 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 func AttackCall(IDOveride: int = -1):
 	SignalManager.AttackInit.emit(IDOveride)
 	SignalManager.AttackReceiverSignal.emit(IDOveride)
-	
-	
