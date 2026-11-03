@@ -25,7 +25,7 @@ texture = ExtResource("3_akdgq")
 script = ExtResource("4_fc4l0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1477624350]
-position = Vector2(960, 540)
+position = Vector2(949, 541)
 zoom = Vector2(0.7, 0.7)
 limit_left = -1257
 limit_top = -1983

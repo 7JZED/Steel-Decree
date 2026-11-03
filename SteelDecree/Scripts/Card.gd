@@ -89,6 +89,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	#attacker
 
+# ATTCK MECAHNICS --------------------------------------------------------------
+
 #attacker
 func Attack(IDOverride: int = -1):
 	AttackMode = true
@@ -123,13 +125,14 @@ func AttackReceiver(IDOverride: int = -1):
 	AttackMode = false
 	add_to_group(str(CardHealth))
 
+#Movement ----------------------------------------------------------------------
 
 func _Move():
 	if CardManager.CurrentSelectedCard == self and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
 		global_position = SelectedCords
 		SignalManager.ActionPerformed.emit("Normal")
 
-#selection detection(rhyme not intended)
+#selection detection(rhyme not intended) ---------------------------------------
 func _on_area_2d_selection() -> void:
 	#normal selection
 	if AttackMode == false and Team == CardManager.CurrentPlayingTeam:
