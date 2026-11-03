@@ -47,7 +47,7 @@ func _ready() -> void:
 	SignalManager.MoveInit.connect(_Move)
 	SignalManager.AttackInit.connect(Attack)
 	SignalManager.ActionPerformed.connect(Action)
-	SignalManager.AITurnPassoff.connect(AIMain)
+	SignalManager.AITurnPassoff.connect(AIAttack)
 	SignalManager.AttackReceiverSignal.connect(AttackReceiver)
 	
 	#telemtry
@@ -142,7 +142,7 @@ func Action():
 		NewSelection.emit()
 
 ## AI ONLY ---------------------------------------------------------------------
-func AIMain(SelectedCards):
+func AIAttack(SelectedCards):
 	if SelectedCards == self:
 		var Attackable = FindCloseCards()
 		print(str(CardID) + str(Attackable))

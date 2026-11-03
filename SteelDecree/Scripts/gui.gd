@@ -8,10 +8,11 @@ signal AttackInit
 signal MoveInit
 signal RedEnable
 signal BlueEnable
-signal ActionPerformed
 
-func _ready() -> void:
-	SignalManager.ActionPerformed.connect(_TurnPass)
+
+func _process(delta: float) -> void:
+	TurnCounter.text = "Turns Left: " + str(CardManager.TurnCount)
+	$Team.text = "Team: " + CardManager.CurrentPlayingTeam
 
 func _on_num_1_pressed() -> void:
 	SignalManager.NewCard.emit(1)
@@ -48,8 +49,3 @@ func _on_move_pressed() -> void:
 
 func _on_attack_pressed() -> void:
 	SignalManager.AttackInit.emit()
-
-func _TurnPass(ActionPerformed: String) -> void:
-	TurnCounter.text = "Turns Left: " + str(CardManager.TurnCount)
-	$Team.text = "Team: " + CardManager.CurrentPlayingTeam
-	

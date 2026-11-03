@@ -35,20 +35,6 @@ func _ready() -> void:
 	SignalManager.AttackInit.connect(_AttackInit)
 	CreateCard(50, "Base", "Red", true, Vector2(-200,-150))
 	CreateCard(50, "Base", "Blue", true, Vector2(300, 1400))
-	
-	#ai side testing
-	CreateCard(10, "Num", "Blue", true, Vector2(300, 700))
-	CreateCard(10, "Num", "Blue", true, Vector2(150, 800))
-	CreateCard(10, "Num", "Blue", true, Vector2(390, 750))
-	CreateCard(10, "Num", "Blue", true, Vector2(490, 700))
-	CreateCard(10, "Num", "Blue", true, Vector2(700, 700))
-
-	#ai side testing
-	CreateCard(10, "Num", "Red", true, Vector2(390, 600))
-	CreateCard(10, "Num", "Red", true, Vector2(150, 650))
-	CreateCard(10, "Num", "Red", true, Vector2(300, 600))
-	CreateCard(10, "Num", "Red", true, Vector2(490, 900))
-	CreateCard(10, "Num", "Red", true, Vector2(650, 800))
 
 
 func _AttackInit():
@@ -58,7 +44,20 @@ func _input(event: InputEvent) -> void:
 	# gets mouse position
 	if Input.is_action_just_pressed("SelectionMouse"):
 		SelectedPos = get_viewport().get_mouse_position()
-
+	
+	# DEBUG ACTIONS
+	if Input.is_action_just_pressed("DebugTurnAdd"):
+		TurnCount += 1
+	if Input.is_action_just_pressed("DebugTurnSub"):
+		TurnCount -= 1
+	if Input.is_action_just_pressed("DebugSwapTeam"):
+		if CurrentPlayingTeam == "Blue":
+			CurrentPlayingTeam = "Red"
+		elif CurrentPlayingTeam == "Red":
+			CurrentPlayingTeam = "Blue"
+	if Input.is_action_just_pressed("DebugCord"):
+		print(SelectedPos)
+	
 func _NewCard(CNum):
 	if TurnCount > 1:
 		SignalManager.ActionPerformed.emit("NewCard")
