@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const  NumCard = preload("uid://jhdwwwy2q1v4")
 const  BaseCard = preload("uid://bhvrbhdi88vgb")
@@ -43,7 +43,7 @@ func _AttackInit():
 func _input(event: InputEvent) -> void:
 	# gets mouse position
 	if Input.is_action_just_pressed("SelectionMouse"):
-		SelectedPos = get_viewport().get_mouse_position()
+		SelectedPos = get_global_mouse_position()
 	
 	# DEBUG ACTIONS
 	if Input.is_action_just_pressed("DebugTurnAdd"):
@@ -92,9 +92,9 @@ func CreateCard(CardNumber, Type, Team: String = "Blue", LocationOverrideEnable:
 		
 		# puts card at current selection
 		if LocationOverrideEnable == false:
-			CardInstance.position = SelectedPos
+			CardInstance.global_position = SelectedPos
 		if LocationOverrideEnable == true:
-			CardInstance.position = LocationOverride
+			CardInstance.global_position = LocationOverride
 
 		#id
 		CardInstance.CardID = IDNum
