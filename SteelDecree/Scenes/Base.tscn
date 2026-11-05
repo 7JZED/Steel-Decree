@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ybnre"]
 size = Vector2(309.00006, 208.14584)
 
-[node name="BaseR" type="Node2D" unique_id=1097567133]
+[node name="Base1" type="Node2D" unique_id=1097567133]
 script = ExtResource("1_ospri")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1077949000]

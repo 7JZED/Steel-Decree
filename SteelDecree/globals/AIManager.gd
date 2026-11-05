@@ -2,6 +2,7 @@ extends Node
 
 var CardList
 var CardListID
+var EnemyBase
 
 var ActiveCards: Dictionary = {}
 
@@ -15,10 +16,16 @@ func _ready() -> void:
 	SignalManager.AITurnPassoff.connect(_MainLoop)
 	SignalManager.AICollsionCarrier.connect(_NewData)
 	SignalManager.AICardInfoRequest.connect(_InfoRequest)
+	
+	for i in get_tree().get_nodes_in_group("Base"):
+		if i.is_in_group("Red"):
+			EnemyBase = i
 
 func _MainLoop():
 	var SelectedCards: Array = GetHighestBlueCards()
 	if CardManager.CurrentPlayingTeam == "Blue":
+		print("-----------------------------------------------------------------")
+		print("ai cycle begin")
 		#grabs top 5 cards
 		SelectedCards = SelectedCards.slice(0, 5)
 		SelectedCards.shuffle()

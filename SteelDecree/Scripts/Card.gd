@@ -144,12 +144,18 @@ func Action():
 ## AI ONLY ---------------------------------------------------------------------
 func AIAttack(SelectedCards):
 	if SelectedCards == self:
-		var Attackable = FindCloseCards()
-		print(str(CardID) + str(Attackable))
-		CardManager.CurrentSelectedCard = self
-		Attackable.shuffle()
-		CardManager.AttackCall(Attackable[0].CardID)
-
+		if FindCloseCards() == []:
+			print("AI DEBUG MOVE")
+			var MovementTarget: Vector2 = AiManager.EnemyBase.position
+			position = position.move_toward(MovementTarget, 200)
+		else:
+			var Attackable = FindCloseCards()
+			print("---------------------------------------------------------------------")
+			print("NEW AI DATA")
+			print(str(CardID) + str(Attackable))
+			CardManager.CurrentSelectedCard = self
+			Attackable.shuffle()
+			CardManager.AttackCall(Attackable[0].CardID)
 #finds nearby cards within threshold
 func FindCloseCards(Threshold: int = 200):
 	var AllCards = get_tree().get_nodes_in_group("Red")

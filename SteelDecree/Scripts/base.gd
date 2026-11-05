@@ -16,8 +16,11 @@ func _ready() -> void:
 	SignalManager.AttackInit.connect(_Attack)
 	if Team == "Blue":
 		TeamLabel.text = "B"
+		add_to_group("Blue")
 	if Team == "Red":
 		TeamLabel.text = "R"
+		add_to_group("Red")
+	add_to_group("Base")
 
 func _process(delta: float) -> void:
 	#card despawner
