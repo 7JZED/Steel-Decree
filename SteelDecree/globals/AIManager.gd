@@ -32,6 +32,7 @@ func _MainLoop():
 	
 		#intial attacking
 		for i in SelectedCards.size():
+			print("AI loop")
 			#checks if they exist to prevent errors
 			if SelectedCards.size() > i:
 				SignalManager.AITurnPassoff.emit(SelectedCards[i])
@@ -80,12 +81,16 @@ func GetHighestRedCards():
 
 func GetHighestBlueCards():
 	var Nodes = get_tree().get_nodes_in_group("Blue")
+	print(get_tree().get_nodes_in_group("Blue"))
 	var PrevHighH = -1
 	var PrevHighNodes = []
 	for node in Nodes:
-		if node.get("CardHealth") > PrevHighH:
-			PrevHighNodes = [node]
-			PrevHighH = node.get("CardHealth")
-		elif node.get("CardHealth") == PrevHighH:
-			PrevHighNodes.append(node)
+		print(node.is_in_group("Base"))
+		if not node.is_in_group("Base"):
+			if node.get("CardHealth") > PrevHighH:
+				PrevHighNodes = [node]
+				PrevHighH = node.get("CardHealth")
+			elif node.get("CardHealth") == PrevHighH:
+				PrevHighNodes.append(node)
+	print(PrevHighNodes)
 	return PrevHighNodes

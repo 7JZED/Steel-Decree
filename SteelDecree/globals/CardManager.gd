@@ -36,7 +36,6 @@ func _ready() -> void:
 	CreateCard(50, "Base", "Red", true, Vector2(-200,-150))
 	CreateCard(50, "Base", "Blue", true, Vector2(300, 1400))
 
-
 func _AttackInit():
 	pass
 
@@ -55,8 +54,9 @@ func _input(event: InputEvent) -> void:
 			CurrentPlayingTeam = "Red"
 		elif CurrentPlayingTeam == "Red":
 			CurrentPlayingTeam = "Blue"
-	if Input.is_action_just_pressed("DebugCord"):
+	if Input.is_action_just_pressed("DebugCard"):
 		print(SelectedPos)
+		print(CurrentSelectedCard)
 	
 func _NewCard(CNum):
 	if TurnCount > 1:

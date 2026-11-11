@@ -144,14 +144,15 @@ func Action():
 ## AI ONLY ---------------------------------------------------------------------
 func AIAttack(SelectedCards):
 	if SelectedCards == self:
+		print("URAAAAAAAAAAAAAAAAAAA")
 		if FindCloseCards() == []:
-			print("AI DEBUG MOVE")
+			print("AI MOVE")
 			var MovementTarget: Vector2 = AiManager.EnemyBase.position
 			position = position.move_toward(MovementTarget, 200)
 		else:
 			var Attackable = FindCloseCards()
 			print("---------------------------------------------------------------------")
-			print("NEW AI DATA")
+			print("AI ATTACK")
 			print(str(CardID) + str(Attackable))
 			CardManager.CurrentSelectedCard = self
 			Attackable.shuffle()
