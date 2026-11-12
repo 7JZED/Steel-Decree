@@ -141,10 +141,10 @@ func Action():
 	if CardManager.CurrentPlayingTeam != Team:
 		NewSelection.emit()
 
+
 ## AI ONLY ---------------------------------------------------------------------
 func AIAttack(SelectedCards):
 	if SelectedCards == self:
-		print("URAAAAAAAAAAAAAAAAAAA")
 		if FindCloseCards() == []:
 			print("AI MOVE")
 			var MovementTarget: Vector2 = AiManager.EnemyBase.position
@@ -157,6 +157,7 @@ func AIAttack(SelectedCards):
 			CardManager.CurrentSelectedCard = self
 			Attackable.shuffle()
 			CardManager.AttackCall(Attackable[0].CardID)
+
 #finds nearby cards within threshold
 func FindCloseCards(Threshold: int = 200):
 	var AllCards = get_tree().get_nodes_in_group("Red")

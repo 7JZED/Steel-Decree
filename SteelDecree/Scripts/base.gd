@@ -33,6 +33,8 @@ func _Attack():
 	if ReceivingID == CardID and CardManager.AttackingTeam != Team:
 		CardHealth = CardHealth - CardManager.AttackingNum
 	AttackMode = false
+	print("-----------------------------")
+	print("base received damage, now has:" + str(CardHealth) + "health")
  
 func _on_area_2d_selection() -> void:
 	if AttackMode == true:
