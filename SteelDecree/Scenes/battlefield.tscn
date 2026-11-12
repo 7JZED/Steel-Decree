@@ -4,7 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://brpxjio8t7q7n" path="res://assets/Map.png" id="2_vyfiw"]
 [ext_resource type="Texture2D" uid="uid://bw4mrqqatbvc6" path="res://assets/Marker1.svg" id="3_akdgq"]
 [ext_resource type="Script" uid="uid://c4ea55kbpnjq8" path="res://Scripts/CordSelector.gd" id="4_fc4l0"]
+[ext_resource type="Script" uid="uid://ffhw4c7ylya2" path="res://Scenes/TerrianFinder.gd" id="5_akdgq"]
 [ext_resource type="Script" uid="uid://b6otqcu856jf" path="res://Scripts/camera.gd" id="5_vyfiw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyfiw"]
+radius = 59.49152
 
 [node name="Battlefield" type="Node2D" unique_id=1995263935]
 
@@ -24,6 +28,13 @@ scale = Vector2(0.25213677, 0.25213677)
 texture = ExtResource("3_akdgq")
 script = ExtResource("4_fc4l0")
 
+[node name="Area2D" type="Area2D" parent="CordSelectionMarker" unique_id=1192113536]
+script = ExtResource("5_akdgq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CordSelectionMarker/Area2D" unique_id=2097544977]
+shape = SubResource("CircleShape2D_vyfiw")
+debug_color = Color(0.72451913, 0.46323335, 0.32287073, 0.41960785)
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1477624350]
 position = Vector2(949, 541)
 zoom = Vector2(0.7, 0.7)
@@ -35,7 +46,12 @@ script = ExtResource("5_vyfiw")
 
 [node name="WaterCollsionBlock" type="Area2D" parent="." unique_id=827338472]
 position = Vector2(-275, 297)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WaterCollsionBlock" unique_id=1005958614]
 position = Vector2(-48.90069, 542.7315)
 polygon = PackedVector2Array(48.90069, -543.7315, 73.90069, -542.7315, 99.90069, -533.7315, 109.90069, -530.7315, 119.90069, -522.7315, 127.90069, -516.7315, 151.9007, -491.7315, 161.9007, -483.7315, 164.9007, -475.7315, 173.9007, -467.7315, 176.9007, -461.7315, 176.9007, -451.7315, 180.9007, -448.7315, 189.9007, -426.7315, 203.9007, -403.7315, 204.9007, -386.7315, 213.9007, -367.7315, 223.9007, -357.7315, 231.9007, -328.7315, 242.9007, -314.7315, 244.9007, -306.7315, 253.9007, -297.7315, 262.9007, -278.7315, 271.9007, -272.7315, 285.9007, -253.7315, 296.9007, -243.7315, 314.9007, -238.7315, 342.9007, -228.7315, 363.9007, -220.7315, 378.9007, -213.7315, 394.9007, -193.7315, 447.9007, -111.73151, 458.9007, -78.73151, 489.9007, -39.731506, 511.9007, 5.2684937, 533.9007, 115.26849, 546.9007, 195.2685, 554.9007, 256.2685, 571.9007, 310.2685, 579.9007, 376.2685, 595.9007, 452.2685, 595.9007, 604.2685, 599.9007, 703.2685, 564.9007, 777.2685, 539.9007, 821.2685, 491.9007, 874.2685, 436.9007, 915.2685, 400.9007, 939.2685, 359.9007, 981.2685, 296.9007, 1055.2686, 195.9007, 1150.2686, 164.9007, 1171.2686, 134.9007, 1197.2686, 98.90069, 1227.2686, 56.90069, 1251.2686, 28.900688, 1261.2686, -39.09931, 1257.2686, -80.09931, 1241.2686, -112.09931, 1226.2686, -146.0993, 1201.2686, -192.0993, 1164.2686, -262.0993, 1097.2686, -299.0993, 1070.2686, -342.0993, 1026.2686, -360.0993, 1010.2685, -378.0993, 980.2685, -396.0993, 942.2685, -405.0993, 917.2685, -410.0993, 885.2685, -424.0993, 843.2685, -433.0993, 789.2685, -437.0993, 756.2685, -447.0993, 736.2685, -486.0993, 582.2685, -498.0993, 506.2685, -512.0993, 441.2685, -525.0993, 381.2685, -535.0993, 363.2685, -516.0993, 349.2685, -522.0993, 326.2685, -517.0993, 289.2685, -514.0993, 261.2685, -488.0993, 226.2685, -459.0993, 214.2685, -440.0993, 175.2685, -432.0993, 129.2685, -417.0993, 72.26849, -410.0993, 30.268494, -403.0993, -11.731506, -380.0993, -97.73151, -339.0993, -167.7315, -300.0993, -220.7315, -274.0993, -262.7315, -248.0993, -330.7315, -228.0993, -375.7315, -162.0993, -484.7315, -128.0993, -503.7315, -85.09931, -518.7315, -44.09931, -526.7315, -11.099312, -533.7315, 23.900688, -534.7315, 35.90069, -539.7315)
+
+[connection signal="area_entered" from="WaterCollsionBlock" to="CordSelectionMarker/Area2D" method="_on_water_collsion_block_area_entered"]
+[connection signal="area_exited" from="WaterCollsionBlock" to="CordSelectionMarker/Area2D" method="_on_water_collsion_block_area_exited"]

@@ -11,3 +11,4 @@ signal AICollsionCarrier
 signal AICardTurnPassoff
 signal AICardInfoRequest
 signal AttackReceiverSignal
+signal MoveLock

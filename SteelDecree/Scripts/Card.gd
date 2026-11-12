@@ -22,6 +22,8 @@ signal NewSelection
 
 #movement
 signal MoveInit
+signal MoveLock(Moveable)
+var MovementStatus = true
 var PointDistance = 0
 var SelectedCords = Vector2(0,0)
 
@@ -49,7 +51,7 @@ func _ready() -> void:
 	SignalManager.ActionPerformed.connect(Action)
 	SignalManager.AITurnPassoff.connect(AIAttack)
 	SignalManager.AttackReceiverSignal.connect(AttackReceiver)
-	
+	SignalManager.MoveLock.connect(_MoveLock)
 	#telemtry
 	print("---------------------------------------------------------------------")
 	print("NEW CARD DATA")
@@ -115,12 +117,18 @@ func AttackReceiver(IDOverride: int = -1):
 		$Sprite2D/Label.text = str(CardHealth)
 	AttackMode = false
 	add_to_group(str(CardHealth))
-#Movement ----------------------------------------------------------------------
 
+#Movement ----------------------------------------------------------------------
 func _Move():
-	if CardManager.CurrentSelectedCard == self and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam:
+	if CardManager.CurrentSelectedCard == self and PointDistance < 150 and Team == CardManager.CurrentPlayingTeam and MovementStatus == true:
 		global_position = SelectedCords
 		SignalManager.ActionPerformed.emit("Normal")
+
+func _MoveLock(Moveable):
+	if Moveable == true:
+		MovementStatus = Moveable
+	if Moveable == false:
+		MovementStatus = Moveable
 
 #selection detection(rhyme not intended) ---------------------------------------
 func _on_area_2d_selection() -> void:

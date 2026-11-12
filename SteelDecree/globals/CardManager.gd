@@ -28,7 +28,6 @@ var SelectedPos: Vector2 = Vector2(300, 300)
 var CurrentSelectedCard: Node
 
 
-
 func _ready() -> void:
 	SignalManager.NewCard.connect(_NewCard)
 	SignalManager.ActionPerformed.connect(_TurnPass)
