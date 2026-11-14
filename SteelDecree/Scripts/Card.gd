@@ -44,7 +44,7 @@ func _ready() -> void:
 	add_to_group(str(CardHealth))
 	add_to_group(Team)
 	
-	# connecting all funcs
+	# connecting all signals
 	SignalManager.NewSelection.connect(NewSelect)
 	SignalManager.MoveInit.connect(_Move)
 	SignalManager.AttackInit.connect(Attack)
@@ -52,6 +52,7 @@ func _ready() -> void:
 	SignalManager.AITurnPassoff.connect(AIAttack)
 	SignalManager.AttackReceiverSignal.connect(AttackReceiver)
 	SignalManager.MoveLock.connect(_MoveLock)
+
 	#telemtry
 	print("---------------------------------------------------------------------")
 	print("NEW CARD DATA")
@@ -125,6 +126,8 @@ func _Move():
 		SignalManager.ActionPerformed.emit("Normal")
 
 func _MoveLock(Moveable):
+	print("movelock")
+	print(Moveable)
 	if Moveable == true:
 		MovementStatus = Moveable
 	if Moveable == false:

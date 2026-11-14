@@ -29,6 +29,8 @@ texture = ExtResource("3_akdgq")
 script = ExtResource("4_fc4l0")
 
 [node name="Area2D" type="Area2D" parent="CordSelectionMarker" unique_id=1192113536]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("5_akdgq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CordSelectionMarker/Area2D" unique_id=2097544977]

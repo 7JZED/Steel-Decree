@@ -3,8 +3,8 @@ signal MoveLock
 
 
 func _on_water_collsion_block_area_entered(area: Area2D) -> void:
-	SignalManager.MoveLock.emit(true)
+	SignalManager.MoveLock.emit(false)
 
 
 func _on_water_collsion_block_area_exited(area: Area2D) -> void:
-	SignalManager.MoveLock.emit(false)
+	SignalManager.MoveLock.emit(true)
