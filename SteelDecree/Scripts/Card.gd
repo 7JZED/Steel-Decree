@@ -126,8 +126,6 @@ func _Move():
 		SignalManager.ActionPerformed.emit("Normal")
 
 func _MoveLock(Moveable):
-	print("movelock")
-	print(Moveable)
 	if Moveable == true:
 		MovementStatus = Moveable
 	if Moveable == false:
@@ -157,14 +155,15 @@ func Action():
 func AIAttack(SelectedCards):
 	if SelectedCards == self:
 		if FindCloseCards() == []:
+			print("---------------------------------------------------------------------")
 			print("AI MOVE")
+			
 			var MovementTarget: Vector2 = AiManager.EnemyBase.position
 			position = position.move_toward(MovementTarget, 200)
 		else:
 			var Attackable = FindCloseCards()
 			print("---------------------------------------------------------------------")
 			print("AI ATTACK")
-			print(str(CardID) + str(Attackable))
 			CardManager.CurrentSelectedCard = self
 			Attackable.shuffle()
 			CardManager.AttackCall(Attackable[0].CardID)
